@@ -1,0 +1,129 @@
+!########################################
+!! urxvt config
+!########################################
+
+! special
+*.foreground:   #ffffff
+*.background:   #1b1b1b
+*.cursorColor:  #ffffff
+
+! black
+*.color0:       #3d3d3d
+*.color8:       #4d4d4d
+
+! red
+*.color1:       #6673bf
+*.color9:       #899aff
+
+! green
+*.color2:       #3ea290
+*.color10:      #52ad91
+
+! yellow
+*.color3:       #b0ead9
+*.color11:      #98c9bb
+
+! blue
+*.color4:       #31658c
+*.color12:      #477ab3
+
+! magenta
+*.color5:       #596196
+*.color13:      #7882bf
+
+! cyan
+*.color6:       #8292b2
+*.color14:      #95a7cc
+
+! white
+*.color7:       #c8cacc
+*.color15:      #edeff2
+
+
+! MY THEME
+!*.foreground:   #98d1ce
+!*.background:   #0a0f14
+!*.cursorColor:  #98d1ce
+!*.color0:       #0a0f14
+!*.color8:       #10151b
+!*.color1:       #c33027
+!*.color9:       #d26939
+!*.color2:       #26a98b
+!*.color10:      #33859d
+!*.color3:       #edb54b
+!*.color11:      #33859d
+!*.color4:       #33859d
+!*.color12:      #33859d
+!*.color5:       #4e5165
+!*.color13:      #888ba5
+!*.color6:       #33859d
+!*.color14:      #599caa
+!*.color7:       #98d1ce
+!*.color15:      #d3ebe9
+
+!! GRUVBOX
+!URxvt.background: [90]#1d2021
+!URxvt.foreground: #ebdbb2
+!URxvt.color0:  #282828
+!URxvt.color8:  #928374
+!URxvt.color1:  #cc241d
+!URxvt.color9:  #fb4934
+!URxvt.color2:  #98971a
+!URxvt.color10: #b8bb26
+!URxvt.color3:  #d79921
+!URxvt.color11: #fabd2f
+!URxvt.color4:  #458588
+!URxvt.color12: #83a598
+!URxvt.color5:  #b16286
+!URxvt.color13: #d3869b
+!URxvt.color6:  #689d6a
+!URxvt.color14: #8ec07c
+!URxvt.color7:  #a89984
+!URxvt.color15: #ebdbb2
+
+URxvt.saveLines:		1000000
+URxvt.iso14755:         false
+URxvt.iso14755_52:      false
+URxvt.scrollBar:	    false
+URxvt.font:				xft:UbuntuMono Nerd Font Mono:size=12
+URxvt.cursorColor:	    green
+URxvt*internalBorder:	15
+URxvt.intensityStyles:	false
+URxvt.depth:            32
+URxvt.cursor:				#a8a19f
+
+!########################################
+!########################################
+! SXIV IMAGE VIEWER
+Sxiv.background: #000000
+Sxiv.foreground: #00C0FF
+Sxiv.font: UbuntuMono Nerd Font Mono:size=16
+
+!########################################
+!########################################
+!! Extensions
+!URxvt.perl-ext-common:         pasta
+URxvt.perl-ext-common:          default,matcher,resize-font,-confirm-paste,selection-to-clipboard
+!! keyboard-select:
+URxvt.keysym.M-Escape:          perl:keyboard-select:activate
+!! Fullscreen
+URxvt.keysym.F11:               perl:fullscreen:switch
+!! resize-font
+!! 'C' is CTRL
+URxvt.resize-font.smaller:	    C-\0x2d
+URxvt.resize-font.bigger:	    C-\0x2b
+!! To reset size, press C-=
+!! Matcher
+URxvt.url-launcher:             /usr/bin/brave
+URxvt.matcher.button:	        1
+URxvt.matcher.rend.0:           Uline Bold fg5
+URxvt.keysym.M-u:               matcher:select
+!! Tabs
+URxvt.tabbed.tabbar-fg:         2
+URxvt.tabbed.tabbar-bg:         0
+URxvt.tabbed.tab-fg:            3
+URxvt.tabbed.tab-bg:            0
+!! Copy Paste
+URxvt.keysym.Shift-Control-V:   eval:paste_clipboard
+URxvt.keysym.Shift-Control-C:   eval:selection_to_clipboard
+URxvt.clipboard.autocopy:       true
