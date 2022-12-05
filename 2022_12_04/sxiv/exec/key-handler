@@ -1,0 +1,15 @@
+#!/bin/sh
+
+while read file
+do
+        case "$1" in
+        "C-d")
+                mkdir ./_trash; mv "$file" ./_trash ;;
+        "C-r")
+                convert -rotate 90 "$file" "$file" ;;
+        "C-c")
+                xclip -selection clipboard -t image/png "$file";;
+        "C-z")
+                mkdir ./_best; mv "$file" ./_best ;;
+        esac
+done

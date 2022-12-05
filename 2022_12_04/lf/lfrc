@@ -1,0 +1,126 @@
+##################################
+# LF CONFIG
+##################################
+
+# Basic vars and commands
+# {{{
+set shellopts '-eu'
+set ifs "\n"
+set scrolloff 10
+set period 1
+set cleaner '~/.config/lf/cleaner'
+set previewer '~/.config/lf/scope'
+set info size
+# }}}
+
+# Remove keybinds
+#{{{
+map r
+map q 
+map gh
+map ZZ 
+map S
+map g top
+map <c-o> 
+map <c-y> 
+map ; 
+map S
+map s
+map b
+map bg
+#}}}
+
+# Commands
+# {{{
+cmd mkdir ${{
+	mkdir -p "$(echo $* | tr ' ' '\ ')"
+	notify-send -t 3000 "Created folder $*"
+}} 
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/html) setsid -f surf "$f";;
+        text/plain) setsid -f surf "$f";;
+		application/pdf) setsid -f firefox "$f";;
+        text/*|application/json) $EDITOR "$f";;
+		
+		#image/*) setsid -f sxiv -fab "$fx";;
+		image/*) rotdir $f | grep -i "\.\(png\|jpg\|jpeg\|gif\|webp\|tif\|ico\)\(_large\)*$" |
+		setsid -f sxiv -faiob 2>/dev/null | while read -r file; do
+			[ -z "$file" ] && continue
+			lf -remote "send select \"$file\""
+			lf -remote "send toggle"
+		done &
+		;;
+
+		*) setsid -f xdg-open "$f" ;;
+    esac
+}}
+cmd extract ${{
+	clear; tput cup $(($(tput lines)/3)); tput bold
+	set -f
+	printf "%s\n\t" "$fx"
+	printf "extract?[y/N]"
+	read ans
+	[ $ans = "y" ] && aunpack $fx
+}}
+cmd trash ${{
+# {{{
+  files=$(printf "$fx" | tr '\n' ';')
+  while [ "$files" ]; do
+    file=${files%%;*}
+    trash-put "$(basename "$file")"
+    if [ "$files" = "$file" ]; then
+      files=''
+    else
+      files="${files#*;}"
+    fi
+  done
+}}
+map DD trash
+map <delete> trash
+# }}} TRASH END
+# }}} COMMANDS END
+
+# Rename files
+# {{{
+map A rename # at the very end
+map w push A<c-u> # new rename
+map I push A<c-a> # at the very beginning
+map i push A<a-b><a-b><a-f> # before extension
+map a push A<a-b> # after extension
+map V push :!nvim<space>
+map br $vimv $fx
+# }}}
+
+# Wallpaper
+#{{{
+cmd setwallpaper ${{
+	convert -resize 1920 "$f" /home/marslander/.wall.png
+	feh --bg-scale /home/marslander/.wall.png
+}}
+# }}}
+
+# Keybinds
+#{{{
+map <c-n> push :mkdir<space>
+map <c-s> set hidden!
+map <c-o> $firefox "$fx" &
+map <c-v> $nvim "$f"
+map <c-y> $printf "$fx" | xclip -sel clip
+map <c-d> $thunar "$f" &
+map n $/home/marslander/scripts/piew
+map <enter> shell
+map r reload
+map q calcdirsize
+map ZZ quit
+map o &mimeopen $f
+map O $mimeopen --ask $f
+map Y $printf "%s" "$fx" | xclip -selection clipboard
+map S $zsh
+map s $ranger
+map E extract
+map bg setwallpaper
+#map Zp $tar -c "$f" | pv -s $(du -sb "$f" | awk '{print $1}') > "$f_$(date +%Y_%m_%d).tar"
+# }}}
+
+
