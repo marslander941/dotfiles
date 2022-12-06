@@ -175,8 +175,8 @@ findmove () {
 #{{{
 rsdd () {
 	reset
-	SRC=/home/$USER/1_int/
-	DST=/home/$USER/2_ext/
+	SRC=
+	DST=
 	rsync -avhW --dry-run \
 		--delete-before \
 		--stats \
@@ -185,8 +185,8 @@ rsdd () {
 }
 rsrd () {
 	reset
-	SRC=/home/$USER/1_int/
-	DST=/home/$USER/2_ext/
+	SRC=
+	DST=
 	LOGFILE=/home/$USER/.rsync.txt
 	trash-put "$LOGFILE" 2>/dev/null
 	rsync -avh \
